@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<timestamp key="timestamp" datePattern="yyyy-MM-dd"/>
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level %logger{36}.%M - %msg%n</pattern>
+		</encoder>
+	</appender>
+	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>D:/log/logCarrito${timestamp}.log</file>
+		<append>true</append>
+		<immediateFlush>true</immediateFlush>
+		<encoder>
+			<pattern>%d{dd-MM-yyyy HH:mm:ss.SSS} %-5level %logger{36}.%M - %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+	      <fileNamePattern>D:/log/logCarrito_%d{dd-MM-yyyy}_%i.log</fileNamePattern>
+	      <maxFileSize>200MB</maxFileSize>
+	      <maxHistory>20</maxHistory>
+	      <totalSizeCap>1024MB</totalSizeCap>
+	    </rollingPolicy>
+	</appender>
+
+
+	<logger name="com.prueba" level="info" additivity="false">
+	  <appender-ref ref="STDOUT"/>
+	  <appender-ref ref="FILE" />
+	</logger>
+	
+	<root level="error">
+		<appender-ref ref="STDOUT"/>
+		<appender-ref ref="FILE" />
+	</root>
+
+</configuration>
